@@ -7,13 +7,13 @@ const app = express();
 
 app.use(bodyParser.json());
 
-// Connect to MongoDB
+
 mongoose.connect('mongodb://localhost/project', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-// Define the User schema
+
 const userSchema = new mongoose.Schema({
     firstName: {
       type: String,
@@ -45,7 +45,7 @@ app.post('/submit', async (req, res) => {
         return res.status(400).json({ message: 'Missing required fields' });
       }
   
-      // Create and save the user document
+      
       const newUser = new User({ firstName, lastName, email });
       await newUser.save();
   
