@@ -15,20 +15,50 @@ mongoose.connect('mongodb://localhost/project', {
 
 
 const userSchema = new mongoose.Schema({
-    firstName: {
-      type: String,
-      required: true, 
-    },
-    lastName: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true, 
-      unique: true,
-    },
-    // Other fields...
+    
+  "firstName": {
+    "type": "string",
+    "minLength": 1,
+    "maxLength": 255,
+    "pattern": "^[a-zA-Z]+$"
+  },
+  "lastName": {
+    "type": "string",
+    "minLength": 1,
+    "maxLength": 255,
+    "pattern": "^[a-zA-Z]+$"
+  },
+  "email": {
+    "type": "string",
+    "minLength": 5,
+    "maxLength": 255,
+    "pattern": "^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-z]{2,3}$"
+  },
+  "country": {
+    "type": "string",
+    "enum": ["Country 1", "Country 2", "Country 3", ...]
+  },
+  "state": {
+    "type": "string",
+    "enum": ["State 1", "State 2", "State 3", ...]
+  },
+  "city": {
+    "type": "string",
+    "enum": ["City 1", "City 2", "City 3", ...]
+  },
+  "gender": {
+    "type": "string",
+    "enum": ["Male", "Female"]
+  },
+  "dateOfBirth": {
+    "type": "string",
+    "format": "date"
+  },
+  "age": {
+    "type": "integer"
+  }
+
+
   });
   
 
@@ -38,7 +68,7 @@ const User = mongoose.model('User', userSchema);
 
 app.post('/submit', async (req, res) => {
     try {
-      const { firstName, lastName, email } = req.body;
+      const {firstName,lastName,email,country,state,city,gender,dateOfBirth,age} = req.body;
   
       Check if required fields are provided
       if (!firstName || !lastName || !email) {
@@ -46,7 +76,7 @@ app.post('/submit', async (req, res) => {
       }
   
       
-      const newUser = new User({ firstName, lastName, email });
+      const newUser = new User({firstName,lastName,email,country,state,city,gender,dateOfBirth,age});
       await newUser.save();
   
       console.log('User saved successfully');
