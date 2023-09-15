@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-// Middleware to parse JSON data from the request body
+
 app.use(bodyParser.json());
 
 // Connect to MongoDB
@@ -17,15 +17,15 @@ mongoose.connect('mongodb://localhost/project', {
 const userSchema = new mongoose.Schema({
     firstName: {
       type: String,
-      required: true, // Ensure that 'firstName' is required
+      required: true, 
     },
     lastName: {
       type: String,
-      required: true, // Ensure that 'lastName' is required
+      required: true,
     },
     email: {
       type: String,
-      required: true, // Ensure that 'email' is required
+      required: true, 
       unique: true,
     },
     // Other fields...
@@ -40,10 +40,10 @@ app.post('/submit', async (req, res) => {
     try {
       const { firstName, lastName, email } = req.body;
   
-      // Check if required fields are provided
-    //   if (!firstName || !lastName || !email) {
-    //     return res.status(400).json({ message: 'Missing required fields' });
-    //   }
+      Check if required fields are provided
+      if (!firstName || !lastName || !email) {
+        return res.status(400).json({ message: 'Missing required fields' });
+      }
   
       // Create and save the user document
       const newUser = new User({ firstName, lastName, email });
