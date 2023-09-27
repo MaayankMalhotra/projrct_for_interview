@@ -11,49 +11,49 @@ const RegistrationForm = () => {
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [age, setAge] = useState("");
 
-  const validateForm = () => {
-    if (firstName.length === 0) {
-      alert("First name is required");
-      return false;
-    }
-    if (lastName.length === 0) {
-      alert("Last name is required");
-      return false;
-    }
-    if (!email.match(/^[\w-.]+@[\w-]+\.[a-z]{2,3}$/)) {
-      alert("Invalid email address");
-      return false;
-    }
-    if (country.length === 0) {
-      alert("Country is required");
-      return false;
-    }
-    if (state.length === 0) {
-      alert("State is required");
-      return false;
-    }
-    if (city.length === 0) {
-      alert("City is required");
-      return false;
-    }
-    if (gender.length === 0) {
-      alert("Gender is required");
-      return false;
-    }
-    if (dateOfBirth.length === 0) {
-      alert("Date of birth is required");
-      return false;
-    }
-    return true;
-  };
+  // const validateForm = () => {
+  //   if (firstName.length === 0) {
+  //     alert("First name is required");
+  //     return false;
+  //   }
+  //   if (lastName.length === 0) {
+  //     alert("Last name is required");
+  //     return false;
+  //   }
+  //   if (!email.match(/^[\w-.]+@[\w-]+\.[a-z]{2,3}$/)) {
+  //     alert("Invalid email address");
+  //     return false;
+  //   }
+  //   // if (country.length === 0) {
+  //   //   alert("Country is required");
+  //   //   return false;
+  //   // }
+  //   // if (state.length === 0) {
+  //   //   alert("State is required");
+  //   //   return false;
+  //   // }
+  //   // if (city.length === 0) {
+  //   //   alert("City is required");
+  //   //   return false;
+  //   // }
+  //   if (gender.length === 0) {
+  //     alert("Gender is required");
+  //     return false;
+  //   }
+  //   if (dateOfBirth.length === 0) {
+  //     alert("Date of birth is required");
+  //     return false;
+  //   }
+  //   return true;
+  // };
 
   const handleSubmit = async () => {
-    if (!validateForm()) {
-      return;
-    }
+    // if (!validateForm()) {
+    //   return;
+    // }
   
   
-    const submitResponse = await fetch("/submit", {
+    const submitResponse = await fetch("http://localhost:3000/submit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -66,7 +66,7 @@ const RegistrationForm = () => {
         state,
         city,
         gender,
-        dateOfBirth,
+        dateOfBirth
       }),
     });
   

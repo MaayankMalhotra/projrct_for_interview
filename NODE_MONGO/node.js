@@ -1,8 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
 
 
 app.use(bodyParser.json());
@@ -36,15 +38,15 @@ const userSchema = new mongoose.Schema({
   },
   "country": {
     "type": "string",
-    "enum": ["Country 1", "Country 2", "Country 3", ...]
+    // "enum": ["Country 1", "Country 2", "Country 3"]
   },
   "state": {
     "type": "string",
-    "enum": ["State 1", "State 2", "State 3", ...]
+    // "enum": ["State 1", "State 2", "State 3"]
   },
   "city": {
     "type": "string",
-    "enum": ["City 1", "City 2", "City 3", ...]
+    // "enum": ["City 1", "City 2", "City 3"]
   },
   "gender": {
     "type": "string",
@@ -54,9 +56,7 @@ const userSchema = new mongoose.Schema({
     "type": "string",
     "format": "date"
   },
-  "age": {
-    "type": "integer"
-  }
+  
 
 
   });
@@ -68,15 +68,16 @@ const User = mongoose.model('User', userSchema);
 
 app.post('/submit', async (req, res) => {
     try {
-      const {firstName,lastName,email,country,state,city,gender,dateOfBirth,age} = req.body;
+      console.log('hitting the route')
+      const {firstName,lastName,email,country,state,city,gender,dateOfBirth} = req.body;
   
-      Check if required fields are provided
+     
       if (!firstName || !lastName || !email) {
         return res.status(400).json({ message: 'Missing required fields' });
       }
   
       
-      const newUser = new User({firstName,lastName,email,country,state,city,gender,dateOfBirth,age});
+      const newUser = new User({firstName,lastName,email,country,state,city,gender,dateOfBirth});
       await newUser.save();
   
       console.log('User saved successfully');
